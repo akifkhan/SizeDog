@@ -6,6 +6,7 @@
 
 # Commands
 losetup -f /home/akif/test/image.img
+losetup -f /home/akif/test/image2.img
 echo " loop created "
 #pvcreate /dev/loop0
 #echo " PV created"
@@ -13,13 +14,15 @@ echo " loop created "
 #echo " VG created"
 #lvcreate -L1000 -ntestlv test
 #echo " lv created testlv"
+#mke2fs /dev/test/testlv
+#echo " File system created"
 #lvcreate -L1000 -ntestlv2 test
 #echo " 2nd lv created testlv2"
-#mke2fs /dev/test/testlv
+#mke2fs /dev/test/testlv2
 #echo " File system created"
 # Activating the VG
 vgchange -a y test
 #activated VG
 
-mount /dev/test/testlv /mnt
-echo " Mounted and Finished succesfully "
+#mount /dev/test/testlv /mnt
+#echo " Mounted and Finished succesfully "

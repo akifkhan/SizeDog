@@ -24,11 +24,11 @@
 import os
 import sys
 import subprocess
+import optparse
 
 
 def main():
-    print 'hello'
-    print "lol"
+    
     return 0
     
 	
