@@ -35,32 +35,29 @@ def increase(volume,size,unit):
 
 	FILESYSTEM, err = p.communicate()
 
-	if 'ext2' in FILESYSTEM:
+	# Extending Logical volume
+	
+	p1 = subprocess.Popen(['lvextend','-L+1G',volume],stdout=subprocess.PIPE)
 
-		p1 = subprocess.Popen(['lvextend','-L+1G',volume],stdout=subprocess.PIPE)
+	output, error = p1.communicate()
 
-		output, error = p1.communicate()
+	if output:
+		print output
 
-		if output:
-			print output
+	if error:
+		print error
 
-		if error:
-			print error
-
-		# Resizing Filesystem
-
+	# Resizing Filesystem ext2 and ext3
+	
+	if ('ext2' or 'ext3') in FILESYSTEM:
+		
 		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
-
 		output, error = p1.communicate()
-
 
 		p1=subprocess.Popen(['resize2fs',volume],stdout=subprocess.PIPE)
-
 		output, error = p1.communicate()
 
-
 		p1=subprocess.Popen(['mount',volume,'/mnt'],stdout=subprocess.PIPE)
-
 		output, error = p1.communicate()
 
 		if output:
@@ -68,6 +65,28 @@ def increase(volume,size,unit):
 		
 		if error:
 			print error
+
+
+	# Resizing Filesystem reiserfs
+	
+	if 'reiserfs' in FILESYSTEM:
+		
+		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
+		output, error = p1.communicate()
+
+		p1=subprocess.Popen(['resize2fs',volume],stdout=subprocess.PIPE)
+		output, error = p1.communicate()
+
+		p1=subprocess.Popen(['mount',volume,'/mnt'],stdout=subprocess.PIPE)
+		output, error = p1.communicate()
+
+		if output:
+			print output
+		
+		if error:
+			print error
+
+	
 
 
 increase(volume,1,'G')
