@@ -49,7 +49,8 @@ def increase(volume,size,unit):
 
 	# Resizing Filesystem ext2 and ext3
 	
-	if ('ext2' or 'ext3') in FILESYSTEM:
+	'''	
+	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
 		
 		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
@@ -67,7 +68,7 @@ def increase(volume,size,unit):
 			print error
 
 
-	# Resizing Filesystem reiserfs
+	# Resizing File system reiserfs
 	
 	if 'reiserfs' in FILESYSTEM:
 		
@@ -86,7 +87,15 @@ def increase(volume,size,unit):
 		if error:
 			print error
 
-	
+	'''
+	p1 = subprocess.Popen(['fsadm','-e','-y','resize',volume],stdout=subprocess.PIPE)
+	output, error = p1.communicate()
+
+	print output
+	print error
+
+
+
 
 
 increase(volume,1,'G')
