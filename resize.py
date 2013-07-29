@@ -24,8 +24,9 @@ import subprocess
 
 volume = "/dev/test/testlv2"
 
-
 def increase(volume,size,unit):
+
+	size_unit = '+' + size + unit
 
 	# Fetching the Filesystem of Volume
 
@@ -37,7 +38,7 @@ def increase(volume,size,unit):
 
 	# Extending Logical volume
 	
-	p1 = subprocess.Popen(['lvextend','-L+1G',volume],stdout=subprocess.PIPE)
+	p1 = subprocess.Popen(['lvextend','-L',size_unit,volume],stdout=subprocess.PIPE)
 
 	output, error = p1.communicate()
 
@@ -49,7 +50,7 @@ def increase(volume,size,unit):
 
 	# Resizing Filesystem ext2 and ext3
 	
-	'''	
+	
 	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
 		
 		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
@@ -87,16 +88,19 @@ def increase(volume,size,unit):
 		if error:
 			print error
 
-	'''
+	
 	p1 = subprocess.Popen(['fsadm','-e','-y','resize',volume],stdout=subprocess.PIPE)
-	output, error = p1.communicate()
+							output, error = p1.communicate()
+	
+	if output
+		print output
+	
+	if error
+		print error
 
-	print output
-	print error
 
 
 
 
-
-increase(volume,1,'G')
+increase(volume,'1','G')
 #fsadm to grow the file system online.  ext4
