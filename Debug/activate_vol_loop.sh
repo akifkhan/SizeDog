@@ -4,9 +4,10 @@
 
 
 # Commands
-losetup -f /home/akif/test/image.img
-losetup -f /home/akif/test/image2.img
-echo " loop created "s
+losetup -f /home/akif/test/image.img ]
+
+  echo " loop created "
+
 
 # Activating the VG
 vgchange -a y test

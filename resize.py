@@ -22,7 +22,8 @@
 
 import subprocess
 
-volume = "/dev/test/testlv2"
+if __name__ == "__main__":
+
 
 def increase(volume,size,unit):
 
@@ -53,13 +54,7 @@ def increase(volume,size,unit):
 	
 	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
 		
-		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
-		output, error = p1.communicate()
-
-		p1=subprocess.Popen(['resize2fs',volume],stdout=subprocess.PIPE)
-		output, error = p1.communicate()
-
-		p1=subprocess.Popen(['mount',volume,'/mnt'],stdout=subprocess.PIPE)
+		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume,size+unit],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
 
 		if output:
@@ -88,19 +83,5 @@ def increase(volume,size,unit):
 		if error:
 			print error
 
-	
-	p1 = subprocess.Popen(['fsadm','-e','-y','resize',volume],stdout=subprocess.PIPE)
-							output, error = p1.communicate()
-	
-	if output
-		print output
-	
-	if error
-		print error
 
-
-
-
-
-increase(volume,'1','G')
-#fsadm to grow the file system online.  ext4
+#increase(volume,'1','G')

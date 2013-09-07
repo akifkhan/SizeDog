@@ -23,15 +23,17 @@
 
 import os
 import sys
-import subprocess
 import optparse
+import resize
 
+volume = "/dev/test/testlv2"
 
 def main():
+   	
+	resize.increase(volume,'1','G')
+
+	return 0
     
-    return 0
-    
-	
 
 if __name__ == '__main__':
 	main()
