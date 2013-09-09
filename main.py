@@ -23,14 +23,35 @@
 
 import os
 import sys
-import optparse
+import argparse
 import resize
 
-volume = "/dev/test/testlv2"
+#volume = "/dev/test/testlv2"
 
 def main():
    	
-	resize.increase(volume,'1','G')
+
+
+   	parser = argparse.ArgumentParser()
+	#Parsing the command line arguments
+	# The options are specified here
+
+	resize_group = parser.add_argument_group('resize_group','Resizing Fuctions')
+
+	resize_group.add_argument('-r','--resize', action="store_true", default=False, help="Input the volume and size by which you want to increase the volume")
+
+	resize_group.add_argument('volume',action ="store" ,help= " Name of the volume along with its path to be increased")
+
+	resize_group.add_argument('size',action ="store",type=int ,help= "Size by which a volume is to be incresed only in Mega Byte [M], Giga Byte [G], Tera Byte[T] ")		
+	
+	resize_group.add_argument('unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1G' ,choices=('M','G','T','m','g','t'))
+
+	args = parser.parse_args()
+
+	print args.volume
+	print args.size
+	print args.unit
+	#resize.increase(volume,size,'G')
 
 	return 0
     

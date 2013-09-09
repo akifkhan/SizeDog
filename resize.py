@@ -21,9 +21,7 @@
 #  MA 02110-1301, USA.
 
 import subprocess
-
-if __name__ == "__main__":
-
+#if __name__ == "__main__":
 
 def increase(volume,size,unit):
 
