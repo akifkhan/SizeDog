@@ -44,14 +44,15 @@ def main():
 
 	resize_group.add_argument('size',action ="store",type=int ,help= "Size by which a volume is to be incresed only in Mega Byte [M], Giga Byte [G], Tera Byte[T] ")		
 	
-	resize_group.add_argument('unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1G' ,choices=('M','G','T','m','g','t'))
+	resize_group.add_argument('unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1 G' ,choices=('M','G','T','m','g','t'))
 
 	args = parser.parse_args()
 
 	print args.volume
 	print args.size
 	print args.unit
-	#resize.increase(volume,size,'G')
+
+	#resize.increase(volume,size,unit)
 
 	return 0
     
