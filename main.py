@@ -25,6 +25,7 @@ import os
 import sys
 import argparse
 import resize
+import config_file_parser
 
 #volume = "/dev/test/testlv2"
 
@@ -46,13 +47,30 @@ def main():
 	
 	resize_group.add_argument('unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1 G' ,choices=('M','G','T','m','g','t'))
 
-	args = parser.parse_args()
+	
+	parser2 = argparse.ArgumentParser()
+	config_group = parser2.add_argument_group('config_group','Edit Configuration File')
 
-	print args.volume
-	print args.size
-	print args.unit
+	config_group.add_argument('-c','--config', action="store_true", default=False, help="Build Config File Manually")
+	
+	args=parser.parse_args()
+	
+	args2 = parser2.parse_args()
 
-	#resize.increase(volume,size,unit)
+	if args.resize == True:
+		
+		resize.increase(args.volume,args.size,args.unit)
+	
+
+	if args2.config == True:
+		print 'a'
+		
+		#config_file_parser.config_edit()
+
+	else:
+		print 'Auto resizing Enabled. Config File Build Automatically with Default Options'
+
+	
 
 	return 0
     
