@@ -1,7 +1,8 @@
 import ConfigParser
 
-if __name__ == "__main__":
 
+    
+if ConfigParser:
     def config_add():
 
         config = ConfigParser.RawConfigParser()
@@ -34,7 +35,7 @@ if __name__ == "__main__":
             config.set('resize_options', 'auto_resize', 'True')
 
         else:
-            print"Wrong Choice Auto Resize Disabled"
+            print" Auto Resize Disabled"
             config_add()
 
 
@@ -45,7 +46,7 @@ if __name__ == "__main__":
            config.set('resize_options', 'volume_resize', 'True')
 
         else:
-            print"Wrong Choice Volume Resize Disabled"
+            print" Volume Resize Disabled"
             config_add()
             
         
@@ -54,5 +55,13 @@ if __name__ == "__main__":
         with open('/etc/sizedog.cfg', 'wb') as configfile:
             config.write(configfile)
 
+
+    def add_volume(volume,free_size):
+
+        config = ConfigParser.RawConfigParser()
+        config.add_section('auto_resize_options')
+
+
+        config.set('auto_resize_options',volume,free_size)
 
 

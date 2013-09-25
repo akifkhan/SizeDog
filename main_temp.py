@@ -38,41 +38,35 @@ def main():
 	# The options are specified here
 
 	
-
 	
-	resize_group = parser.add_argument_group('resize_group','Resizing Fuctions')
 
-	resize_group.add_argument('-r','--resize', action="store_true", default=False, help="Input the volume and size by which you want to increase the volume")
+	parser.add_argument('-r','--resize', action="store_true", default=False, help="Input the volume and size by which you want to increase the volume")
 
-	resize_group.add_argument('volume',action ="store" ,help= " Name of the volume along with its path to be increased")
+	parser.add_argument('--volume',action ="store" ,help= " Name of the volume along with its path to be increased")
 
-	resize_group.add_argument('size',action ="store",type=int ,help= "Size by which a volume is to be incresed only in Mega Byte [M], Giga Byte [G], Tera Byte[T] ")		
+	parser.add_argument('--size',action ="store",help= "Size by which a volume is to be incresed only in Mega Byte [M], Giga Byte [G], Tera Byte[T] ")		
 	
-	resize_group.add_argument('unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1 G' ,choices=('M','G','T','m','g','t'))
+	parser.add_argument('--unit', action ="store" ,help ='Units of size use as main.py -r /dev/testlv/lv1 1 G' ,choices=('M','G','T','m','g','t'))
 
-	
-	
-	config_group = parser.add_argument_group('config_group','Edit Configuration File')
+	###CONFIG FILE ARGS.
 
-	config_group.add_argument('-c','--config', action="store_true", default=False, help="Build Config File Manually")
+	parser.add_argument('-c','--config', action="store_true", default=False, help="Build Config File Manually")
 	
 	
 	args=parser.parse_args()
 
 
 	if args.resize == True:
-		
-		print args.volume
-		#resize.increase(args.volume,args.size,args.unit)
+		if args.volume:
+			if args.size:
+				if args.unit:
+					resize.increase(args.volume,args.size,args.unit)
 	
 
 	if args.config == True:
-		print 'a'
-		
-		#config_file_parser.config_edit()
+		config_file_parser.config_edit()
 
-	else:
-		print 'Auto resizing Enabled. Config File Build Automatically with Default Options'
+	
 
 	
 
