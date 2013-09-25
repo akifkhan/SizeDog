@@ -51,7 +51,11 @@ def main():
 	###CONFIG FILE ARGS.
 
 	parser.add_argument('-c','--config', action="store_true", default=False, help="Build Config File Manually")
+
+	#Add Volumes to config file for auto resize
 	
+	parser.add_argument('-v',action="store_true", default=False, help="Add volumes to  Config File Manually")
+
 	
 	args=parser.parse_args()
 
@@ -67,6 +71,8 @@ def main():
 		config_file_parser.config_edit()
 
 	
+	if args.v == True:
+		config_file_parser.add_volume()
 
 	
 

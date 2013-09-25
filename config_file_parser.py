@@ -15,7 +15,7 @@ if ConfigParser:
 
     # Writing our configuration file to 'sizedog.cfg'
 
-        with open('/etc/sizedog.cfg', 'wb') as configfile:
+        with open('/etc/sizedog.cfg', 'a') as configfile:
             config.write(configfile)
 
 
@@ -52,22 +52,28 @@ if ConfigParser:
         
         # Writing our configuration file to 'sizedog.cfg'
 
-        with open('/etc/sizedog.cfg', 'wb') as configfile:
+        with open('/etc/sizedog.cfg', 'a') as configfile:
             config.write(configfile)
 
 
-    def add_volume(volume,free_size):
+    def add_volume():
+
+        #vol=raw_input("Enter volume name: ")
+        #free_size= raw_input("Enter Size to be free in volume with Units [MB,GB,TB]: ")
 
         config = ConfigParser.RawConfigParser()
         
-        config.add_section('auto_resize_options')
+        
+        config.read('/etc/sizedog.cfg')
+        
+        if config.has_section('auto_resize_options'):
+            config.set('auto_resize_options',vol,free_size)
 
-
-        config.set('auto_resize_options',volume,free_size)
+        else:
+            config.add_section('auto_resize_options')
 
         
-
-        with open('/etc/sizedog.cfg', 'wb') as configfile:
+        with open('/etc/sizedog.cfg', 'a') as configfile:
             config.write(configfile)
 
 
