@@ -59,9 +59,16 @@ if ConfigParser:
     def add_volume(volume,free_size):
 
         config = ConfigParser.RawConfigParser()
+        
         config.add_section('auto_resize_options')
 
 
         config.set('auto_resize_options',volume,free_size)
+
+        
+
+        with open('/etc/sizedog.cfg', 'wb') as configfile:
+            config.write(configfile)
+
 
 
