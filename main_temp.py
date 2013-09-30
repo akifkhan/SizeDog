@@ -56,10 +56,11 @@ def main():
 	
 	parser.add_argument('-v',action="store_true", default=False, help="Add volumes to  Config File Manually")
 
+	parser.add_argument('-a',action="store_true", default=False, help="Automatic increase size of volumes")
+
 	
 	args=parser.parse_args()
-
-
+	
 	if args.resize == True:
 		if args.volume:
 			if args.size:

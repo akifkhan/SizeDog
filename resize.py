@@ -51,7 +51,7 @@ def increase(volume,size,unit):
 	
 	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
 		
-		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume,size+unit],stdout=subprocess.PIPE)
+		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume,size_unit],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
 
 		if output:
@@ -67,7 +67,8 @@ def increase(volume,size,unit):
 		
 		p1=subprocess.Popen(['umount',volume],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
-
+		
+	
 		p1=subprocess.Popen(['resize2fs',volume],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
 
