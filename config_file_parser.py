@@ -58,8 +58,8 @@ if ConfigParser:
 
     def add_volume():
 
-        #vol=raw_input("Enter volume name: ")
-        #free_size= raw_input("Enter Size to be free in volume with Units [MB,GB,TB]: ")
+        vol=raw_input("Enter volume name: ")
+        free_size= raw_input("Enter MAX size of volume to which it can be extended [MB,GB,TB]: ")
 
         config = ConfigParser.RawConfigParser()
         
@@ -71,10 +71,16 @@ if ConfigParser:
 
         else:
             config.add_section('auto_resize_options')
-
+            config.set('auto_resize_options',vol,free_size)
         
         with open('/etc/sizedog.cfg', 'a') as configfile:
             config.write(configfile)
 
 
+    def read_config():
+        
+        config = ConfigParser.RawConfigParser()
+        config.read('/etc/sizedog.cfg') 
 
+        vol_options=config.items('auto_resize_options')
+        print vol_options

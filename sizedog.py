@@ -75,6 +75,9 @@ def main():
 	if args.v == True:
 		config_file_parser.add_volume()
 
+	if args.a== True:
+		config_file_parser.read_config()	
+
 	
 
 	return 0
