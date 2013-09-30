@@ -46,12 +46,13 @@ def increase(volume,size,unit):
 	if error:
 		print error
 
+
 	# Resizing Filesystem ext2 and ext3
 	
 	
 	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
 		
-		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume,size_unit],stdout=subprocess.PIPE)
+		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
 
 		if output:
