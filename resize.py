@@ -34,6 +34,8 @@ def increase(volume,size,unit):
 
 	FILESYSTEM, err = p.communicate()
 
+	print FILESYSTEM
+
 	# Extending Logical volume
 	
 	p1 = subprocess.Popen(['lvextend','-L',size_unit,volume],stdout=subprocess.PIPE)
@@ -50,7 +52,7 @@ def increase(volume,size,unit):
 	# Resizing Filesystem ext2 and ext3
 	
 	
-	if ('ext2' or 'ext3' or 'ext4') in FILESYSTEM:
+	if 'ext2' or 'ext3' or 'ext4' in FILESYSTEM:
 		
 		p1=subprocess.Popen(['fsadm','-e','-y','resize',volume],stdout=subprocess.PIPE)
 		output, error = p1.communicate()
